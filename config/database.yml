@@ -4,11 +4,11 @@
 default: &default
   adapter: postgresql
   encoding: utf8
-  database: test_task
+  database: <%= ENV['db_database'] %>
   host: localhost
   pool: 5
-  username: pguser
-  password: password
+  username: <%= ENV['db_user'] %>
+  password: <%= ENV['db_password'] %>
 
 development:
   <<: *default
