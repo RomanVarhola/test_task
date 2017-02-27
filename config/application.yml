@@ -1,4 +1,0 @@
-#!ruby
-db_user: 'pguser'
-db_password: 'password'
-db_database: 'test_task'
