@@ -10,5 +10,7 @@ Things you may want to cover:
 * Rails version 4.2.7.1
 
 rake db:create
+
 rake db:migrate 
+
 rake db:seed
