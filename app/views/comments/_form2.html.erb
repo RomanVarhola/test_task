@@ -1,0 +1,15 @@
+<div class="col-lg-6">
+<div class="well">
+  <h4>Edit Comment:</h4>
+    <%= form_for [@article,@comment] do |f| %>
+      <div class="form-group">
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+
+    <div class="actions">
+      <%= f.submit class: 'btn btn-primary' %>
+      <%= link_to 'Back', article_path(@article), class: 'btn btn-primary' %>
+	</div>
+  <% end %>
+  </div>
+</div>

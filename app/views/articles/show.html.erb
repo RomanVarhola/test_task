@@ -1,0 +1,62 @@
+<% if notice %>
+<div class="alert alert-info"><%= notice %></div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+        <h1><%= @article.title%></h1>
+          <p class="lead">
+            by <%= link_to @user.full_name, user_path(@user) %>
+          </p>
+             <hr>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on <%=time_ago_in_words(@article.created_at) %></p>
+                <hr>
+                <% if @article.avatar_file_name.nil?%>
+                  <%= article_image(@article, size: 200)%>
+                <% else %>
+                  <%= image_tag(@article.avatar(:medium))%>
+                <% end%>
+                <hr>
+                <%= @article.content%>
+                <hr>
+                <%= render 'comments/form', article: @article %>
+                <hr>
+
+              <% @article.comments.each do |comment|%>
+                <% unless comment.description.nil? %>
+                <% @user = User.find(comment.user_id) %>
+                <div class="media">
+                    <div class="pull-left">
+                        <%= article_image @user, size: '50x50'%>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading"> <%= @user.full_name %>
+                            <small><%= time_ago_in_words(comment.created_at)%></small>
+                        </h4>
+                        <%= comment.description%>
+                    </div>
+                    <% if current_user ==  @user%>
+                      <%= link_to 'edit', edit_article_comment_path(@article,comment) %> 
+                      <%= link_to 'delete', article_comment_path(@article, comment), method: :delete,  data: { confirm: 'Are you sure?' }%>
+                    <% end %>
+                </div>
+                <% end %>
+              <% end %>
+    </div> 
+
+            <div class="col-md-4">
+                
+                <div class="well">
+                    <h4>Side Widget Well</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                </div>
+
+            </div>
+
+        </div>
+        
+        <hr>
+
+</div>
+

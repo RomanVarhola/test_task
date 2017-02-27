@@ -1,0 +1,33 @@
+  <div class="well">
+      <div class="media">
+      	<a class="pull-left" href="#">
+        <% if article.avatar_file_name.nil?%>
+    		  <%= article_image(article)%>
+        <% else %>
+          <%= image_tag(article.avatar(:thumb))%>
+        <% end%>
+  		  </a>
+  		<div class="media-body">
+    		<h4 class="media-heading"><%= link_to article.title, article_path(article)%></h4>
+          <p class="text-right">By <%= link_to user.full_name, user_path(user)%></p>
+          <p><%= article.content%></p>
+          <ul class="list-inline list-unstyled">
+  			<li><span><i class="glyphicon glyphicon-calendar"></i> <%= time_ago_in_words(article.created_at) %></span></li>
+            <li>|</li>
+            <span><i class="glyphicon glyphicon-comment"></i> 
+              <%= link_to article_path(article) do %>
+            <%= article.comments.count%> comments
+            <% end %> 
+            </span>
+        </ul>
+       </div>
+
+       <% if @user == current_user %>
+        <div class="pull-right" >
+          <%= link_to 'Edit', edit_article_path(article), class: 'btn btn-primary'  %>
+          <%= link_to 'Delete', article_path(article), method: :delete  , class: 'btn btn-danger'  %>
+        </div>
+       <% end %>
+    </div>
+   
+  </div>

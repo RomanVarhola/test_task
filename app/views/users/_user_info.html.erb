@@ -1,0 +1,24 @@
+<section>
+      <h1>
+        <%= avatar(@user, size: 100) %>
+        <br/>
+        <%= @user.full_name %>
+      </h1>
+    </section>
+    <section>
+      		<div class="stats text-center padding-left">
+  					<%= link_to following_user_path(@user) do %>
+          	<strong id="following" class="stat">
+      					<%= @user.followed_users.count %>
+    					</strong>
+    						following
+  					<% end %>
+  							
+  				<%= link_to followers_user_path(@user) do %>
+          	<strong id="followers" class="stat">
+      					<%= @user.followers.count %>
+    					</strong>
+    					followers
+  					<% end %>
+					</div>
+    </section>

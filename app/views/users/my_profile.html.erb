@@ -1,0 +1,21 @@
+<% provide(:title, 'My profile') %>
+
+<% if notice %>
+<div class="alert alert-info"><%= notice %></div>
+<% end %>
+
+<div class="col-lg-4">
+  <%= link_to 'All users', users_path, class: 'btn btn-primary'%>  
+  <%= link_to 'Feed', feed_users_path, class: 'btn btn-primary'%>  
+  <%= render 'user_info' %>
+</div>
+
+
+<div class="col-lg-8">
+<%= link_to 'Add article', new_article_path, class: 'btn btn-primary btn-margin'%>
+
+
+<% @articles.each do |article|%>
+  <%= render 'articles/article', :article => article, :user => @user %>
+<% end %>
+</div>

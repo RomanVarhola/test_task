@@ -1,0 +1,6 @@
+<%= link_to "View my profile", user_path(current_user), class: 'btn btn-primary margin-botton'%>
+    
+<% @articles.each do |article|%>
+	<% @user = User.find(article.user_id) %>
+  <%= render 'articles/article', :article => article, :user => @user %>
+<% end %>
