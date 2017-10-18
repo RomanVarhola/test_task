@@ -2,13 +2,13 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_comment, only: %i(edit destroy)
   before_action :find_article, only: %i(edit create destroy)
-  
+
   def edit
   end
 
   def create
     @comment = @article.comments.new(comment_params)
-    
+
     respond_to do |format|
       if @comment.save
         format.html { redirect_to article_path(@article), notice: 'Comment was successfully created.' }
@@ -41,7 +41,7 @@ class CommentsController < ApplicationController
   end
 
   private
-    
+
     def find_comment
       @comment = Comment.find(params[:id])
     end
