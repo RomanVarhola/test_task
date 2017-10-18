@@ -23,21 +23,18 @@ RSpec.describe ArticlesController, type: :controller do
   let(:user) {FactoryGirl.create(:user)}
   let(:valid_attributes) { FactoryGirl.attributes_for(:article)}
   let(:invalid_attributes) do {
-    title: '', content: ''
-    }
+   { title: '', content: '' }
   end
 
   before do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
-
-
+  
   describe "valid user" do
     before do
       sign_in(user)
     end
- 
-
+    
     describe "GET show" do
       it "assigns the requested article as @article" do
         article = user.articles.create! valid_attributes

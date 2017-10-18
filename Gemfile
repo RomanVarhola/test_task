@@ -39,7 +39,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'pg'
+gem 'mysql2'
 gem 'capybara'
 gem 'rspec-its'
 gem 'guard-rspec', require: false

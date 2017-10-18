@@ -1,30 +1,21 @@
 class ArticlesController < ApplicationController
-  before_action :load_article, except: [:new, :create, :show]
   before_action :authenticate_user!
-  before_action :load_user, only: [:create, :update, :destroy]
-
+  before_action :find_article, only: %i(show update edit destroy)
   
-  # GET /articles/1
-  # GET /articles/1.json
   def show
-    @article = Article.find(params[:id])
-    @user = User.find(@article.user_id)
+    @user = @article.user
     @comment = Comment.new
   end
 
-  # GET /articles/new
   def new
     @article = Article.new
   end
 
-  # GET /articles/1/edit
   def edit
   end
 
-  # POST /articles
-  # POST /articles.json
   def create
-    @article = @user.articles.new(article_params)
+    @article = current_user.articles.new(article_params)
 
     respond_to do |format|
       if @article.save
@@ -37,8 +28,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
   def update
     respond_to do |format|
       if @article.update(article_params)
@@ -51,8 +40,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # DELETE /articles/1
-  # DELETE /articles/1.json
   def destroy
     @article.destroy
     respond_to do |format|
@@ -62,18 +49,12 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def load_article
+    
+    def find_article
       @article = Article.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :content, :avatar)
-    end
-
-    def load_user
-      authenticate_user!
-      @user = current_user
     end
 end

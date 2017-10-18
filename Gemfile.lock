@@ -127,6 +127,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
+    mysql2 (0.4.9)
     nenv (0.3.0)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
@@ -140,7 +141,6 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
-    pg (0.19.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -263,8 +263,8 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  mysql2
   paperclip (~> 5.0.0)
-  pg
   pry
   puma (~> 3.0)
   rails (= 4.2.7.1)
@@ -284,4 +284,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.3
+   1.15.3

@@ -1,19 +1,18 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user!
-	
+	before_action :find_user, only: %i(following followers show)
+
 	def index
 		@users = User.all
 	end
 
 	def show
-		@user = User.find(params[:id])
 		@articles = @user.articles	
 	end
 
 	def feed
-		@user = current_user
-		@users = @user.followed_users
-		@articles = Article.where(:user_id => @users).order(:created_at)
+		@users = current_user.followed_users
+		@articles = Article.where(user_id: @users).order(:created_at)
 	end
 
 	def my_profile
@@ -23,25 +22,24 @@ class UsersController < ApplicationController
 
 	def following
     @title = "Following"
-    @user = User.find(params[:id])
-    @users = @user.followed_users#.paginate(page: params[:page])
+    @users = @user.followed_users
     render 'show_follow'
   end
 
   def followers
    	@title = "Followers"
-    @user = User.find(params[:id])
-    @users = @user.followers#.paginate(page: params[:page])
+    @users = @user.followers
     render 'show_follow'
   end
 
-	
-	
-  private
+	private
 	
 		# Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email,:first_name,:last_name, :avatar)
     end
 
+    def find_user
+      @user = User.find(params[:id])
+    end
 end

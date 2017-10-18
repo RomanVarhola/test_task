@@ -25,18 +25,17 @@
 
               <% @article.comments.each do |comment|%>
                 <% unless comment.description.nil? %>
-                <% @user = User.find(comment.user_id) %>
                 <div class="media">
                     <div class="pull-left">
-                        <%= article_image @user, size: '50x50'%>
+                        <%= article_image comment.user, size: '50x50'%>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading"> <%= @user.full_name %>
+                        <h4 class="media-heading"> <%= comment.user.full_name %>
                             <small><%= time_ago_in_words(comment.created_at)%></small>
                         </h4>
-                        <%= comment.description%>
+                        <%= comment.description %>
                     </div>
-                    <% if current_user ==  @user%>
+                    <% if current_user == comment.user %>
                       <%= link_to 'edit', edit_article_comment_path(@article,comment) %> 
                       <%= link_to 'delete', article_comment_path(@article, comment), method: :delete,  data: { confirm: 'Are you sure?' }%>
                     <% end %>
